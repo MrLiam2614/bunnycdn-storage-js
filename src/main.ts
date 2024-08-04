@@ -2,7 +2,7 @@ import axios, {AxiosInstance, AxiosPromise, AxiosResponse, ResponseType} from 'a
 import {createReadStream, ReadStream} from 'fs';
 import {parse} from 'path';
 
-const defaultBaseUrl: string = 'https://storage.bunnycdn.com'
+const defaultBaseUrl: string = 'https://storage.bunnycdn.com';
 
 export default class BunnyCDNStorage {
   private client: AxiosInstance;
@@ -17,29 +17,28 @@ export default class BunnyCDNStorage {
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
-    })
-
+    });
   }
 
-  list(path?: string) : AxiosPromise<any> {
+  list(path?: string): AxiosPromise<any> {
     return this.client({
       method: 'GET',
       url: path
-    })
+    });
   }
 
-  delete(path?: string) : AxiosPromise<any> {
+  delete(path?: string): AxiosPromise<any> {
     return this.client({
       method: 'DELETE',
       url: path
-    })
+    });
   }
 
-  async upload(file: Buffer, remotePath?: string) : Promise<AxiosResponse>;
-  async upload(filePath: string, remotePath?: string) : Promise<AxiosResponse>;
+  async upload(file: Buffer, remotePath?: string): Promise<AxiosResponse>;
+  async upload(filePath: string, remotePath?: string): Promise<AxiosResponse>;
 
-  async upload(fileOrPath: Buffer | string, remotePath?: string) : Promise<AxiosResponse> {
-    let file: (Buffer | ReadStream);
+  async upload(fileOrPath: Buffer | string, remotePath?: string): Promise<AxiosResponse> {
+    let file: Buffer | ReadStream;
     if (!Buffer.isBuffer(fileOrPath)) {
       if (typeof remotePath === 'undefined') {
         remotePath = parse(fileOrPath).base;
@@ -53,17 +52,16 @@ export default class BunnyCDNStorage {
       method: 'PUT',
       url: remotePath,
       data: file
-    })
+    });
 
     return response;
   }
 
-  download(filePath: string, responseType?: ResponseType) : AxiosPromise<any> {
+  download(filePath: string, responseType?: ResponseType): AxiosPromise<any> {
     return this.client({
       method: 'GET',
       url: filePath,
-      responseType: responseType || 'arraybuffer' 
-    })
+      responseType: responseType || 'arraybuffer'
+    });
   }
-
 }
