@@ -1,6 +1,6 @@
-import axios, { AxiosInstance, AxiosPromise, AxiosResponse, ResponseType } from 'axios';
-import { createReadStream, ReadStream } from 'fs';
-import { parse } from 'path';
+import axios, {AxiosInstance, AxiosPromise, AxiosResponse, ResponseType} from 'axios';
+import {createReadStream, ReadStream} from 'fs';
+import {parse} from 'path';
 
 const defaultBaseUrl: string = 'https://storage.bunnycdn.com'
 
